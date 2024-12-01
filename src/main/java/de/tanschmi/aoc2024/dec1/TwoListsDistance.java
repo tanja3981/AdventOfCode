@@ -21,7 +21,7 @@ public class TwoListsDistance {
         sortColumns(lefts, rights);
 
         if (lefts.size() != rights.size()) {
-            throw new RuntimeException("Die Länge der Liste ist unterschiedlich!");
+            throw new RuntimeException("Die Länge der Liste ist unterschiedlich!!!");
         }
 
         ArrayList<Integer> diffs = calcDiffs(lefts, rights);
