@@ -1,0 +1,43 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '2.0.20'
+}
+
+group = 'de.tanschmi.kotlin'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.36'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
+
+    // Log4j2 Core
+    implementation("org.apache.logging.log4j:log4j-core:2.20.0")
+
+    // Log4j2 API
+    implementation("org.apache.logging.log4j:log4j-api:2.20.0")
+
+    // If using SLF4J as a facade, use the Log4j2 SLF4J Binding
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.20.0")
+
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api-kotlin', version: '1.5.0'
+
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation 'commons-io:commons-io:2.18.0'
+
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(17)
+}
