@@ -16,13 +16,22 @@ public class Dec2 {
         ListReader reader = new ListReader();
         List<Sequence> sequences = reader.readSequences(file);
 
-        int sum = countSafe(sequences);
+        int sum = countSafe1(sequences);
         log.info("Summe: {}", sum);
         return sum;
     }
 
+    public int step2(File file) throws IOException {
 
-    private int countSafe(List<Sequence> sequences) {
+        ListReader reader = new ListReader();
+        List<Sequence> sequences = reader.readSequences(file);
+
+        int sum = countSafe2(sequences);
+        log.info("Summe: {}", sum);
+        return sum;
+    }
+
+    private int countSafe1(List<Sequence> sequences) {
         int sum = 0;
         for (Sequence seq : sequences) {
             boolean safe = isSequenceSafe(seq.getColumns());
@@ -31,6 +40,28 @@ public class Dec2 {
             }
         }
         return sum;
+    }
+
+    private int countSafe2(List<Sequence> sequences) {
+        int sum = 0;
+        for (Sequence seq : sequences) {
+            boolean isSafe = areSubsequencesSafe(seq);
+            if (isSafe) {
+                sum++;
+            }
+        }
+        return sum;
+    }
+
+    boolean areSubsequencesSafe(Sequence seq) {
+        int safe = 0;
+        for (int i = 0; i < seq.size(); i++) {
+            ArrayList<Integer> subseq = seq.getWithoutCol(i);
+            if (isSequenceSafe(subseq)) {
+                safe++;
+            }
+        }
+        return safe > 0;
     }
 
     boolean isSequenceSafe(ArrayList<Integer> columns) {
