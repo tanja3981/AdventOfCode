@@ -11,16 +11,31 @@ class FileReader {
     }
 
     fun readFile(file: File, lefts: ArrayList<Long>, rights: ArrayList<Long>) {
-        val lines: List<String> = FileUtils.readLines(file, Charset.defaultCharset())
+        var lines: List<String> = FileUtils.readLines(file, Charset.defaultCharset())
 
 
         for (line in lines) {
-            val splitted = line.split("   ")
+            var splitted = line.split("   ")
             var left: String = splitted[0]
             var right: String = splitted[1]
 
             lefts.add(left.trim().toLong())
             rights.add(right.trim().toLong())
         }
+    }
+
+    fun readSequences(file: File): ArrayList<Sequence> {
+        var lines: List<String> = FileUtils.readLines(file, Charset.defaultCharset())
+        var sequences: ArrayList<Sequence> = ArrayList<Sequence>()
+
+        for (line in lines) {
+            var splitted = line.split(" ")
+            var seq: Sequence = Sequence()
+            for (s in splitted) {
+                seq.numbers.add(s.toInt())
+            }
+            sequences.add(seq);
+        }
+        return sequences;
     }
 }
