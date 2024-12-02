@@ -5,13 +5,12 @@ import java.io.File
 
 const val LIMIT = 3;
 
-class Dec2 {
+class Task1 {
     companion object {
         private val log = logger()
     }
 
     fun task1(input: File): Int {
-
         var sequences: ArrayList<Sequence> = FileReader().readSequences(input)
         var sum = countSafeSequences(sequences)
         log.info("Summe für Task 1: $sum")
@@ -21,7 +20,7 @@ class Dec2 {
     private fun countSafeSequences(sequences: ArrayList<Sequence>): Int {
         var sum: Int = 0
         for (sequence in sequences) {
-            var isSafe: Boolean = isSafeSequence1(sequence)
+            var isSafe: Boolean = isSafeSequence(sequence)
             if (isSafe) {
                 sum++;
             }
@@ -29,8 +28,7 @@ class Dec2 {
         return sum;
     }
 
-
-    fun isSafeSequence1(sequence: Sequence): Boolean {
+    fun isSafeSequence(sequence: Sequence): Boolean {
         var increasing: Boolean? = null;
         for (i in 1..(sequence.numbers.size - 1)) {
             var first = sequence.numbers.get(i - 1)
@@ -62,8 +60,56 @@ class Dec2 {
 
 }
 
+class Task2 {
+    companion object {
+        private val log = logger()
+    }
+
+    fun task2(input: File): Int {
+
+        var sequences: ArrayList<Sequence> = FileReader().readSequences(input)
+        var sum = countSafeSequences(sequences)
+        log.info("Summe für Task 2: $sum")
+        return sum
+    }
+
+    private fun countSafeSequences(sequences: ArrayList<Sequence>): Int {
+        var sum: Int = 0
+        for (sequence in sequences) {
+            var isSafe: Boolean = isSafeSequence(sequence)
+            if (isSafe) {
+                sum++;
+            }
+        }
+        return sum;
+    }
+
+    fun isSafeSequence(sequence: Sequence): Boolean {
+        var task1 = Task1()
+
+
+        val subsequences = sequence.getSubsequences()
+        for (s in subsequences) {
+            if (task1.isSafeSequence(s)) {
+                return true
+            }
+        }
+return false;
+        //return task1.isSafeSequence(sequence);
+    }
+}
+
 class Sequence {
     var numbers: ArrayList<Int> = ArrayList<Int>();
 
-
+    fun getSubsequences(): List<Sequence> {
+        var list = ArrayList<Sequence>()
+        for (i in 0..(numbers.size - 1)) {
+            var newlist = ArrayList<Int>(numbers.filterIndexed { index, _ -> index != i })
+            var newSeq = Sequence()
+            newSeq.numbers = newlist
+            list.add(newSeq)
+        }
+        return list
+    }
 }
