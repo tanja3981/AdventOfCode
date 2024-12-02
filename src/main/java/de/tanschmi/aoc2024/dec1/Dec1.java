@@ -1,5 +1,6 @@
 package de.tanschmi.aoc2024.dec1;
 
+import de.tanschmi.aoc2024.ListReader;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -13,7 +14,7 @@ public class Dec1 {
         ArrayList<Long> lefts = new ArrayList<>();
         ArrayList<Long> rights = new ArrayList<>();
 
-        new ListReader().read(input, lefts, rights);
+        new ListReader().readTwoColumns(input, lefts, rights);
 
         sortColumns(lefts, rights);
 
@@ -30,7 +31,7 @@ public class Dec1 {
         ArrayList<Long> lefts = new ArrayList<>();
         ArrayList<Long> rights = new ArrayList<>();
 
-        new ListReader().read(input, lefts, rights);
+        new ListReader().readTwoColumns(input, lefts, rights);
 
         long sum = findSimilarities(lefts, rights);
 
