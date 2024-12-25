@@ -1,8 +1,8 @@
-package de.tanschmi.kotlin.aoc2024
+package de.tanschmi.kotlin.aoc2024.dec1
 
+import de.tanschmi.kotlin.aoc2024.de.tanschmi.kotlin.aoc2024.FileReader
 import org.apache.logging.log4j.kotlin.logger
 import java.io.File
-
 
 class Dec1 {
     companion object {

@@ -1,6 +1,8 @@
-import de.tanschmi.kotlin.aoc2024.Sequence
-import de.tanschmi.kotlin.aoc2024.Task1
-import de.tanschmi.kotlin.aoc2024.Task2
+package de.tanschmi.kotlin.aoc2024.dec2
+
+import de.tanschmi.kotlin.aoc2024.de.tanschmi.kotlin.aoc2024.dec2.Sequence
+import de.tanschmi.kotlin.aoc2024.de.tanschmi.kotlin.aoc2024.dec2.Task1
+import de.tanschmi.kotlin.aoc2024.de.tanschmi.kotlin.aoc2024.dec2.Task2
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import java.io.File

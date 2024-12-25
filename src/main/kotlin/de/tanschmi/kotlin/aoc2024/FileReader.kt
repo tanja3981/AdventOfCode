@@ -1,5 +1,6 @@
-package de.tanschmi.kotlin.aoc2024
+package de.tanschmi.kotlin.aoc2024.de.tanschmi.kotlin.aoc2024
 
+import de.tanschmi.kotlin.aoc2024.de.tanschmi.kotlin.aoc2024.dec2.Sequence
 import org.apache.commons.io.FileUtils
 import org.apache.logging.log4j.kotlin.logger
 import java.io.File

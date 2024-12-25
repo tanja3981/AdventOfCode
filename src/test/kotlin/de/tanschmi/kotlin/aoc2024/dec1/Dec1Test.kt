@@ -1,6 +1,7 @@
-import de.tanschmi.kotlin.aoc2024.Dec1
+package de.tanschmi.kotlin.aoc2024.dec1
+
+import org.junit.jupiter.api.Test
 import java.io.File
-import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Dec1Test{
