@@ -1,5 +1,6 @@
 package de.tanschmi.kotlin.aoc2024.dec6
 
+import de.tanschmi.kotlin.aoc2024.deepClone
 import lombok.extern.slf4j.Slf4j
 
 const val UP = 0
@@ -11,12 +12,10 @@ const val LEFT = 3
 class Dec6 {
 
     fun task1(input: String): Int {
-
         var maze: Array<CharArray> = input.lines()
             .filter { it.isNotBlank() }
             .map { it.toCharArray() }
             .toTypedArray()
-        println("Maze: $maze")
 
         var current: Int = findStart(maze)
         var direction: Int = UP
@@ -38,6 +37,61 @@ class Dec6 {
             steps.add(current)
         }
         return steps.size
+    }
+
+    fun task2(input: String): Int {
+        var maze: Array<CharArray> = input.lines()
+            .filter { it.isNotBlank() }
+            .map { it.toCharArray() }
+            .toTypedArray()
+        println("Maze: $maze")
+
+        val current: Int = findStart(maze)
+        var steps: HashMap<Int, ArrayList<Int>> = HashMap()
+        solveMaze(maze, current, steps)
+        var obstacles = 0
+
+        for (possObstacle in steps.keys) {
+            var m = deepClone(maze)
+            m[possObstacle / 1000][possObstacle % 1000] = '0'
+
+            if (solveMaze(m, current, HashMap())) {
+                obstacles++
+            }
+        }
+        return obstacles
+    }
+
+
+    fun solveMaze(maze: Array<CharArray>, start: Int, steps: HashMap<Int, ArrayList<Int>>): Boolean {
+        var current: Int = start
+        var direction: Int = UP
+        while (true) {
+
+
+            var next = nextStep(current, direction)
+
+            if (!checkRange(maze, next)) {
+                return false
+            }
+            if (checkObstacle(maze, next)) {
+                direction = (direction + 1) % 4
+                continue
+            }
+            current = next
+            //maze[current / 1000][current % 1000] = 'X'
+
+            //check loop
+            var v: ArrayList<Int>? = steps.get(current);
+            if (v == null) {
+                v = ArrayList()
+            }
+            if (v.contains(direction)) {
+                return true
+            }
+            v.add(direction)
+            steps.put(current, v)
+        }
     }
 
     fun checkObstacle(maze: Array<CharArray>, position: Int): Boolean {
