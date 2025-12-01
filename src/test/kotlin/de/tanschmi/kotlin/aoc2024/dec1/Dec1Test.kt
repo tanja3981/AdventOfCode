@@ -11,7 +11,7 @@ class Dec1Test{
     fun testDec1(){
         var expected: Long = 1603498
 
-        var input = File(ClassLoader.getSystemResource("inputs/dec1.txt").file)
+        var input = File(ClassLoader.getSystemResource("2024inputs/dec1.txt").file)
         var sum: Long = dec1.step1(input)
         assertEquals(expected, sum)
     }
@@ -20,7 +20,7 @@ class Dec1Test{
     fun testDec2() {
         var expected: Long = 25574739
 
-        var input = File(ClassLoader.getSystemResource("inputs/dec1.txt").file)
+        var input = File(ClassLoader.getSystemResource("2024inputs/dec1.txt").file)
         var sum = dec1.step2(input)
         assertEquals(expected, sum)
     }

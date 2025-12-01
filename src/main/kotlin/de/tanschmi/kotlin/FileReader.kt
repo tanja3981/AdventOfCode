@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2024.de.tanschmi.kotlin.aoc2024
+package de.tanschmi.kotlin
 
 import de.tanschmi.kotlin.aoc2024.de.tanschmi.kotlin.aoc2024.dec2.Sequence
 import org.apache.commons.io.FileUtils
@@ -37,6 +37,11 @@ class FileReader {
             }
             sequences.add(seq);
         }
-        return sequences;
+        return sequences
+    }
+
+    fun readLines(file: File): List<String> {
+        var lines: List<String> = FileUtils.readLines(file, Charset.defaultCharset())
+        return lines;
     }
 }

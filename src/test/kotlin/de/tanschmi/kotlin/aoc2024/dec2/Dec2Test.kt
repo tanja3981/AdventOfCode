@@ -15,7 +15,7 @@ class Task1Test {
     @Test
     fun testStep1() {
         var expected = 432;
-        var f = File(ClassLoader.getSystemResource("inputs/dec2.txt").file);
+        var f = File(ClassLoader.getSystemResource("2024inputs/dec2.txt").file);
 
         assertEquals(expected, dec2.task1(f));
     }
@@ -63,7 +63,7 @@ class Task2Test {
     @Test
     fun testTask() {
         var expected = 488
-        var f = File(ClassLoader.getSystemResource("inputs/dec2.txt").file);
+        var f = File(ClassLoader.getSystemResource("2024inputs/dec2.txt").file);
 
         assertEquals(expected, dec2.task2(f));
     }

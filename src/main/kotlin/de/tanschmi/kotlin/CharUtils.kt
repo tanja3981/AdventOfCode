@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2024
+package de.tanschmi.kotlin
 
 
 fun deepClone(matrix: Array<CharArray>): Array<CharArray> {
