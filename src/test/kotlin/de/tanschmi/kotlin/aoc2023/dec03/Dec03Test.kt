@@ -40,4 +40,35 @@ class Dec03Test {
 
     }
 
+    @Test
+    fun step2_exampleInput() {
+        val input = """
+            467..114..
+            ...*......
+            ..35..633.
+            ......#...
+            617*......
+            .....+.58.
+            ..592.....
+            ......755.
+            ...$.*....
+            .664.598..
+        """.trimIndent()
+
+        val result = d.step2(input)
+        assertEquals(467835, result)
+
+    }
+
+    @Test
+    fun step2() {
+        val file = File(ClassLoader.getSystemResource("2023/dec03.txt").file)
+        val input = FileUtils.readFileToString(file, Charset.defaultCharset())
+        assertNotNull(input)
+
+        val result = d.step2(input)
+        assertEquals(67779080, result)
+
+    }
+
 }
