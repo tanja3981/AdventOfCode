@@ -1,6 +1,5 @@
 package de.tanschmi.kotlin.aoc2025.dec02
 
-import lombok.`val`
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

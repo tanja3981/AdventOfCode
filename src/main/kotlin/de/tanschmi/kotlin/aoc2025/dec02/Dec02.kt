@@ -39,8 +39,8 @@ class Dec02 {
         for (idRange in idRanges) {
 
             val nos: List<String> = idRange.split("-")
-            var from = nos.get(0).toLong()
-            var to = nos.get(1).toLong()
+            val from = nos.get(0).toLong()
+            val to = nos.get(1).toLong()
 
             analyseRange(from, to, invalidIds, validIds)
 
