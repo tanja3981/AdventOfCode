@@ -25,7 +25,7 @@ class Dec04Test {
         """.trimIndent()
 
         val result = d.step1(input)
-        assertEquals(13L, result)
+        assertEquals(13, result)
     }
 
     @Test
@@ -34,7 +34,34 @@ class Dec04Test {
         val input = FileUtils.readFileToString(file, Charset.defaultCharset())
 
         val result = d.step1(input)
-        assertEquals(1602L, result)
+        assertEquals(1602, result)
     }
 
+    @Test
+    fun step2_exampleInput() {
+        val input = """
+            ..@@.@@@@.
+            @@@.@.@.@@
+            @@@@@.@.@@
+            @.@@@@..@.
+            @@.@@@@.@@
+            .@@@@@@@.@
+            .@.@.@.@@@
+            @.@@@.@@@@
+            .@@@@@@@@.
+            @.@.@@@.@.
+        """.trimIndent()
+
+        val result = d.step2(input)
+        assertEquals(43, result)
+    }
+
+    @Test
+    fun step2() {
+        val file = File(ClassLoader.getSystemResource("2025inputs/dec04.txt").file)
+        val input = FileUtils.readFileToString(file, Charset.defaultCharset())
+
+        val result = d.step2(input)
+        assertEquals(9518, result)
+    }
 }
