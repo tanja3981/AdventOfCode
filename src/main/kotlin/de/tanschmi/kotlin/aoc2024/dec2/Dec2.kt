@@ -1,8 +1,10 @@
 package de.tanschmi.kotlin.aoc2024.de.tanschmi.kotlin.aoc2024.dec2
 
 import de.tanschmi.kotlin.FileReader
+import org.apache.commons.io.FileUtils
 import org.apache.logging.log4j.kotlin.logger
 import java.io.File
+import java.nio.charset.Charset
 
 const val LIMIT = 3;
 
@@ -12,13 +14,13 @@ class Task1 {
     }
 
     fun task1(input: File): Int {
-        var sequences: ArrayList<Sequence> = FileReader().readSequences(input)
+        var sequences: ArrayList<Sequence> = readSequences(input)
         var sum = countSafeSequences(sequences)
         log.info("Summe für Task 1: $sum")
         return sum
     }
 
-    private fun countSafeSequences(sequences: ArrayList<Sequence>): Int {
+    fun countSafeSequences(sequences: ArrayList<Sequence>): Int {
         var sum: Int = 0
         for (sequence in sequences) {
             var isSafe: Boolean = isSafeSequence(sequence)
@@ -59,6 +61,20 @@ class Task1 {
         return true;
     }
 
+    fun readSequences(file: File): ArrayList<Sequence> {
+        var lines: List<String> = FileUtils.readLines(file, Charset.defaultCharset())
+        var sequences: ArrayList<Sequence> = ArrayList<Sequence>()
+
+        for (line in lines) {
+            var splitted = line.split(" ")
+            var seq: Sequence = Sequence()
+            for (s in splitted) {
+                seq.numbers.add(s.toInt())
+            }
+            sequences.add(seq);
+        }
+        return sequences
+    }
 }
 
 class Task2 {
@@ -68,7 +84,7 @@ class Task2 {
 
     fun task2(input: File): Int {
 
-        var sequences: ArrayList<Sequence> = FileReader().readSequences(input)
+        var sequences: ArrayList<Sequence> = Task1().readSequences(input)
         var sum = countSafeSequences(sequences)
         log.info("Summe für Task 2: $sum")
         return sum
@@ -95,9 +111,11 @@ class Task2 {
                 return true
             }
         }
-return false;
+        return false;
         //return task1.isSafeSequence(sequence);
     }
+
+
 }
 
 class Sequence {
@@ -113,4 +131,6 @@ class Sequence {
         }
         return list
     }
+
+
 }

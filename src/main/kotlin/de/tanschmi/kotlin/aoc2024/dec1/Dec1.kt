@@ -1,8 +1,10 @@
 package de.tanschmi.kotlin.aoc2024.dec1
 
 import de.tanschmi.kotlin.FileReader
+import org.apache.commons.io.FileUtils
 import org.apache.logging.log4j.kotlin.logger
 import java.io.File
+import java.nio.charset.Charset
 
 class Dec1 {
     companion object {
@@ -14,7 +16,7 @@ class Dec1 {
         var lefts: ArrayList<Long> = ArrayList<Long>()
         var rights: ArrayList<Long> = ArrayList<Long>()
 
-        FileReader().readFile(input, lefts, rights)
+        readFile(input, lefts, rights)
         sortList(lefts, rights)
         var sum = calcDifference(lefts, rights)
         log.info("Summe: $sum")
@@ -25,7 +27,7 @@ class Dec1 {
         var lefts: ArrayList<Long> = ArrayList<Long>()
         var rights: ArrayList<Long> = ArrayList<Long>()
 
-        FileReader().readFile(input, lefts, rights)
+        readFile(input, lefts, rights)
         sortList(lefts, rights)
         var score = calcScore(lefts, rights)
         log.info("Score: $score")
@@ -62,6 +64,18 @@ class Dec1 {
         log.info("Right: $rights")
     }
 
+    fun readFile(file: File, lefts: ArrayList<Long>, rights: ArrayList<Long>) {
+        var lines: List<String> = FileUtils.readLines(file, Charset.defaultCharset())
 
+
+        for (line in lines) {
+            var splitted = line.split("   ")
+            var left: String = splitted[0]
+            var right: String = splitted[1]
+
+            lefts.add(left.trim().toLong())
+            rights.add(right.trim().toLong())
+        }
+    }
 
 }
