@@ -1,8 +1,5 @@
 package de.tanschmi.kotlin.aoc2025.dec06
 
-import java.util.regex.Matcher
-import kotlin.math.max
-
 class Dec06 {
 
     fun parseInput1(input: String): List<List<String>> {
@@ -19,42 +16,8 @@ class Dec06 {
         for (i in 0..<operations.size) {
             val op = operations[i]
 
-            var maxDigits = 0
-            for(j in 0..matrix.size -1) {
-               maxDigits = max(maxDigits, matrix[j][i].length)
-            }
-            println("$i: $maxDigits")
-
             var subresult = matrix[0][i].toLong()
-            for (j in 1..<matrix.size -1) {
-                val line = matrix[j]
-                val value = line[i].padStart(maxDigits, '0')
-                subresult = operation(op, subresult, value.toLong())
-            }
-            results.add(subresult)
-        }
-        return results.sum()
-    }
-
-    fun operation(operation: String, value1: Long, value2: Long): Long =
-        when (operation) {
-            "+" -> value1 + value2
-            "-" -> value1 - value2
-            "*" -> value1 * value2
-            "/" -> value1 / value2
-            else -> throw Error("Komische Operation " + operation)
-        }
-
-    fun step2(input: String): Long {
-        val matrix = parseInput2(input)
-
-        val operations = matrix.removeLast()
-        val results = ArrayList<Long>()
-        for (i in 0..<operations.size) {
-            val op = operations[i]
-            var subresult = matrix[0][i].toLong()
-
-            for (j in 1..<matrix.size) {
+            for (j in 1..<matrix.size - 1) {
                 val line = matrix[j]
                 subresult = operation(op, subresult, line[i].toLong())
             }
@@ -63,19 +26,61 @@ class Dec06 {
         return results.sum()
     }
 
-    fun parseInput2(input: String): ArrayList<ArrayList<String>> {
+    fun step2(input: String): Long {
+        val lines = ArrayList<String>(input.lines())
+        val last = lines.removeLast()
 
-        val matrix = ArrayList<ArrayList<String>>()
-        for (line in input.lines()) {
-            if (line.isEmpty())
-                continue
-            val parts = line.trim().split("\\s+".toRegex())
-            val sublist = ArrayList<String>()
-            for (part in parts) {
-                sublist.add(part.trim())
+        val regex = Regex("[+\\-*/]\\s+")
+        var blocks = regex.findAll(last).map { matchResult ->
+            val token = matchResult.value
+            val start = matchResult.range.first   // Startindex im Originalstring
+            val length = matchResult.range.last - matchResult.range.first     // Endindex im Originalstring
+            Operator(token, start, length)
+        }.toList()
+
+        //rechts nach links
+        blocks = blocks.reversed()
+        val results = ArrayList<Long>()
+        var firstBlock = true
+        for (block in blocks) {
+            val operator = block.operator
+            val start = block.start
+            var length = block.length
+            if (firstBlock) {
+                firstBlock = false //der letzte Block hat kein Leerzeichen mehr am Ende
+            } else {
+                length -= 1 //das Leerzeichen für die Block Trennung
             }
-            matrix.add(sublist)
+            val numbers = ArrayList<Long>()
+
+            for (lastIndex in (start + length) downTo start) {
+                var number = ""
+                for (line in lines) {
+                    number += line.toCharArray()[lastIndex]
+                }
+                numbers.add(number.trim().toLong())
+            }
+
+            var zresult = numbers.first()
+            for (z in 1..<numbers.size) {
+                zresult = operation(operator, zresult, numbers[z])
+            }
+            results.add(zresult)
+
         }
-        return matrix
+        return results.sum()
     }
+
+    fun operation(operation: String, value1: Long, value2: Long): Long =
+        when (operation.trim()) {
+            "+" -> value1 + value2
+            "-" -> value1 - value2
+            "*" -> value1 * value2
+            "/" -> value1 / value2
+            else -> throw Error("Komische Operation $operation")
+        }
+
+
 }
+
+data class Operator(val operator: String, val start: Int, val length: Int)

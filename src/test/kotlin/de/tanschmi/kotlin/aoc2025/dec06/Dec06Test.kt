@@ -7,6 +7,7 @@ import java.io.File
 import java.nio.charset.Charset
 
 class Dec06Test {
+
     val d = Dec06()
     @Test
     fun step1() {
@@ -28,6 +29,28 @@ class Dec06Test {
 
         val result = d.step1(input)
         assertEquals(4277556L, result)
+    }
+
+    @Test
+    fun step2() {
+        val file = File(ClassLoader.getSystemResource("2025inputs/dec06.txt").file)
+        val input = FileUtils.readFileToString(file, Charset.defaultCharset())
+
+        val result = d.step2(input)
+        assertEquals(9770311947567L, result)
+    }
+
+    @Test
+    fun step2_exampleValue() {
+        val input =
+            """
+123 328  51 64 
+ 45 64  387 23 
+  6 98  215 314
+*   +   *   +  """.trimStart()
+
+        val result = d.step2(input)
+        assertEquals(3263827L, result)
     }
 
 }
