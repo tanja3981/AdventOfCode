@@ -2,58 +2,49 @@ package de.tanschmi.kotlin.aoc2025.dec07
 
 class Dec07 {
     val SPLITTER = '^'
-    var splitCounter: Long = 0L
+
     fun step1(input: String): Long {
-        splitCounter = 0
 
         val matrix = input.lines().map { it.toCharArray() }
+        val start = matrix.first().indexOf('S')
+        var currentLocs: Collection<Int> = listOf(start)
+        var splits = 0L
+        matrix.forEach { line ->
+            val nextCoords = HashSet<Int>()
 
-        val start = findStart(matrix)
-        require(start != null) { "S wurde nicht gefunden!" }
-        tachyonBeam(matrix, arrayListOf(start))
-        return splitCounter
+            currentLocs.forEach { loc ->
+                if (line[loc] == SPLITTER) {
+                    splits++
+                    nextCoords.add(loc - 1)
+                    nextCoords.add(loc + 1)
+                } else {
+                    nextCoords.add(loc)
+                }
+            }
+            currentLocs = nextCoords
+        }
+      return splits
     }
 
-    fun tachyonBeam(matrix: List<CharArray>, coords: Collection<Coord>) {
-        val newCoords = HashSet<Coord>()
+    fun step2(input: String): Long {
+        val matrix = input.lines().map { it.toCharArray() }
 
-        for (start in coords) {
-            val newY = start.y + 1
-            if(newY >= matrix.size)
-                continue
-            val x = start.x
-            if (matrix[newY][x] == SPLITTER) {
-                //split
-                if (x - 1 >= 0) { //left
-                    newCoords.add(Coord(x - 1, newY))
+        val startX = matrix.first().indexOf('S')
+        var currentLocs = mapOf<Int, Long>(startX to 1L)  //map mit default value initialisieren
+
+        matrix.forEach { line ->
+            val nextCoords = mutableMapOf<Int, Long>()
+
+            currentLocs.forEach { loc ->
+                if (line[loc.key] == SPLITTER) {
+                    nextCoords[loc.key - 1] = loc.value + nextCoords.getOrDefault(loc.key - 1, 0L)
+                    nextCoords[loc.key + 1] = loc.value + nextCoords.getOrDefault(loc.key + 1, 0L)
+                } else {
+                    nextCoords[loc.key] = loc.value + nextCoords.getOrDefault(loc.key, 0L)
                 }
-                if (x + 1 < matrix[newY].size) { //right
-                    newCoords.add(Coord(x + 1, newY))
-                }
-                splitCounter++
-            } else {
-                newCoords.add(Coord(x, newY))
             }
+            currentLocs = nextCoords
         }
-
-        if (newCoords.isNotEmpty()) {
-            tachyonBeam(matrix, newCoords)
-        }
-    }
-
-    fun findStart(input: List<CharArray>): Coord? {
-        for (y in 0..<input.size) {
-            val line = input[y]
-            for (x in 0..<line.size) {
-                if (input[y][x] == 'S')
-                    return Coord(x, y)
-            }
-        }
-        return null
+        return currentLocs.values.sum()
     }
 }
-
-data class Coord(
-    val x: Int,
-    val y: Int
-)
