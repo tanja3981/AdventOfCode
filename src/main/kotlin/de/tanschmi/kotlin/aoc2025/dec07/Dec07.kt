@@ -10,16 +10,11 @@ class Dec07 {
 
         val start = findStart(matrix)
         require(start != null) { "S wurde nicht gefunden!" }
-
-        var coords = tachyonBeam(matrix, arrayListOf(start))
-        while (coords.isNotEmpty()) {
-            coords = tachyonBeam(matrix, coords)
-        }
-
+        tachyonBeam(matrix, arrayListOf(start))
         return splitCounter
     }
 
-    fun tachyonBeam(matrix: List<CharArray>, coords: Collection<Coord>): Collection<Coord> {
+    fun tachyonBeam(matrix: List<CharArray>, coords: Collection<Coord>) {
         val newCoords = HashSet<Coord>()
 
         for (start in coords) {
@@ -41,7 +36,9 @@ class Dec07 {
             }
         }
 
-        return newCoords
+        if (newCoords.isNotEmpty()) {
+            tachyonBeam(matrix, newCoords)
+        }
     }
 
     fun findStart(input: List<CharArray>): Coord? {
