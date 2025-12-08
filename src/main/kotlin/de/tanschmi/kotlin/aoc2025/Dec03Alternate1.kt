@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec03
+package de.tanschmi.kotlin.aoc2025
 
 @Deprecated("Dieser Code ist viel zu langsam, Laufzeit unbekannt. Verwende Dec02Alternate2 mit besserem Algorithmus!")
 class Dec03Alternate1 {
@@ -30,7 +30,7 @@ class Dec03Alternate1 {
 
     fun allCombinations(line: List<Char>, n: Int): Sequence<List<Char>> = sequence {
         if (n == 0) {
-            yield(emptyList<Char>())
+            yield(emptyList())
         } else {
             line.forEachIndexed { i, char ->
                 allCombinations(line.drop(i + 1), n - 1)

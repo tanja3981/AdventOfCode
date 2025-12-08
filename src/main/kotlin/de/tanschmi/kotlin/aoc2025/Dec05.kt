@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec05
+package de.tanschmi.kotlin.aoc2025
 
 class Dec05 {
 
@@ -56,12 +56,12 @@ class Dec05 {
             freshRanges.add(Range(from, to))
         }
 
-    return    countMerged(freshRanges)
+        return countMerged(freshRanges)
 
     }
 
     fun countMerged(unsorted: List<Range>): Long {
-       val sorted = unsorted.sortedBy { it.start }
+        val sorted = unsorted.sortedBy { it.start }
         var currentStart = sorted.first().start
         var currentEnd = sorted.first().end
         var total: Long = 0
@@ -70,20 +70,19 @@ class Dec05 {
             if (range.start <= currentEnd + 1) { //range erweitern
                 currentEnd = maxOf(currentEnd, range.end)
             } else {
-                   total += (currentEnd - currentStart + 1)
+                total += (currentEnd - currentStart + 1)
                 currentStart = range.start
                 currentEnd = range.end
 
             }
         }
         total += (currentEnd - currentStart + 1)
-return total
+        return total
     }
 
 
+    data class Range(
+        val start: Long,
+        val end: Long
+    )
 }
-
-data class Range(
-    val start: Long,
-    val end: Long
-)

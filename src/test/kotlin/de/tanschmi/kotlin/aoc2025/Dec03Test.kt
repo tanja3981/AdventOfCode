@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec03
+package de.tanschmi.kotlin.aoc2025
 
 import de.tanschmi.kotlin.FileReader
 import org.junit.jupiter.api.Assertions.*
@@ -7,7 +7,7 @@ import java.io.File
 
 class Dec03Test {
 
-    val d = Dec03Alternate2()
+    val d = Dec03()
 
     @Test
     fun findInLine_987654321111111() {

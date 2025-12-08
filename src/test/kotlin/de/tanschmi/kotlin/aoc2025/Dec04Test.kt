@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec04
+package de.tanschmi.kotlin.aoc2025
 
 import org.apache.commons.io.FileUtils
 import org.junit.jupiter.api.Assertions.assertEquals

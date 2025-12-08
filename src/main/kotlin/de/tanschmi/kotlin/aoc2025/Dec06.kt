@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec06
+package de.tanschmi.kotlin.aoc2025
 
 class Dec06 {
 
@@ -80,7 +80,7 @@ class Dec06 {
             else -> throw Error("Komische Operation $operation")
         }
 
+    data class Operator(val operator: String, val start: Int, val length: Int)
 
 }
 
-data class Operator(val operator: String, val start: Int, val length: Int)

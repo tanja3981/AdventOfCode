@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec02
+package de.tanschmi.kotlin.aoc2025
 
 class Dec02 {
 
@@ -13,6 +13,7 @@ class Dec02 {
 
         return true
     }
+
     fun isSillyPattern1(s: String): Boolean {
         val length = s.length
         if (length % 2 != 0) {
@@ -23,11 +24,12 @@ class Dec02 {
 
         return first == sec
     }
+
     fun isSillyPattern2(s: String): Boolean {
         val length = s.length
         for (i in 1..length / 2) {
             if (length % i == 0) {
-                val part = s.substring(0, i)
+                val part = s.take(i)
                 val repeated = part.repeat(length / i)
                 if (repeated == s && length / i >= 2) {
                     return true
@@ -44,10 +46,7 @@ class Dec02 {
     }
 
     fun startsWith0(s: String): Boolean {
-        if (s.startsWith("0")) {
-            return true
-        }
-        return false
+        return s.startsWith("0")
     }
 
     fun step1(line: String): Long {
@@ -57,8 +56,8 @@ class Dec02 {
         for (idRange in idRanges) {
 
             val nos: List<String> = idRange.split("-")
-            val from = nos.get(0).toLong()
-            val to = nos.get(1).toLong()
+            val from = nos[0].toLong()
+            val to = nos[1].toLong()
 
             analyseRange(from, to, invalidIds, validIds, ::isSillyPattern1)
 
@@ -74,8 +73,8 @@ class Dec02 {
         for (idRange in idRanges) {
 
             val nos: List<String> = idRange.split("-")
-            val from = nos.get(0).toLong()
-            val to = nos.get(1).toLong()
+            val from = nos[0].toLong()
+            val to = nos[1].toLong()
 
             analyseRange(from, to, invalidIds, validIds, ::isSillyPattern2)
 
@@ -84,7 +83,13 @@ class Dec02 {
         return invalidIds.sum()
     }
 
-    fun analyseRange(from: Long, to: Long, invalidIds: ArrayList<Long>, validIds: ArrayList<Long>, isSillyPattern: (String) -> Boolean) {
+    fun analyseRange(
+        from: Long,
+        to: Long,
+        invalidIds: ArrayList<Long>,
+        validIds: ArrayList<Long>,
+        isSillyPattern: (String) -> Boolean
+    ) {
 
         for (i in from..to) {
             if (isValid(i, isSillyPattern)) {

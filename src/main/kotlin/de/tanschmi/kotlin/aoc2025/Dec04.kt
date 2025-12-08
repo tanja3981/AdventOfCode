@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec04
+package de.tanschmi.kotlin.aoc2025
 
 class Dec04 {
 
@@ -39,11 +39,11 @@ class Dec04 {
     /**
      * for debugging
      */
-    fun toString(matrix: MutableList<MutableList<Char>>) : String {
+    fun toString(matrix: MutableList<MutableList<Char>>): String {
         var out = ""
-        for(row in 0..<matrix.size) {
+        for (row in 0..<matrix.size) {
             out += System.lineSeparator()
-            for(col in 0..<matrix[row].size) {
+            for (col in 0..<matrix[row].size) {
                 out += matrix[row][col]
             }
         }
