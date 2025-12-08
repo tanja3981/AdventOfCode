@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec05
+package de.tanschmi.kotlin.aoc2025
 
 import de.tanschmi.kotlin.FileReader
 import org.junit.jupiter.api.Assertions.*

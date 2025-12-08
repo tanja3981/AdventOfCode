@@ -1,8 +1,8 @@
-package de.tanschmi.kotlin.aoc2025.dec01
+package de.tanschmi.kotlin.aoc2025
 
 import org.apache.logging.log4j.kotlin.logger
 
-class Dec1 {
+class Dec01 {
     companion object {
         private val log = logger()
     }
@@ -24,16 +24,16 @@ class Dec1 {
     }
 
     fun step1(input: List<String>): Long {
-        var counter: Long = 0;
-        var start: Int = 50;
+        var counter = 0L
+        var start = 50
         log.info("Starting at $start")
         for (line in input) {
-            var toDial: Int? = Dec1().parseLine(line)
+            val toDial: Int? = Dec01().parseLine(line)
             if (toDial != null) {
-                start = dial1(toDial, start);
+                start = dial1(toDial, start)
             }
             if (start == 0) {
-                counter++;
+                counter++
             }
         }
         return counter
@@ -42,19 +42,19 @@ class Dec1 {
 
     fun dial1(right: Int, start: Int = 50): Int {
         log.info("Dialing (1) $right from $start")
-        var newDial: Int = (start + right) % 100;
-        return newDial;
+        val newDial: Int = (start + right) % 100
+        return newDial
     }
 
 
     fun step2(input: List<String>): Long {
-        var counter: Long = 0;
-        var start: Int = 50;
+        var counter = 0L
+        var start = 50
         for (line in input) {
             log.debug("handling $line")
-            var toDial: Int? = parseLine(line)
+            val toDial: Int? = parseLine(line)
             if (toDial != null) {
-                var result: Pair<Long, Int> = dial2(toDial, start)
+                val result: Pair<Long, Int> = dial2(toDial, start)
 
                 counter += result.first
                 start = result.second
@@ -65,7 +65,7 @@ class Dec1 {
     }
 
     /**
-     * brute force Methode, gibt sicher was schöneres, aber reicht erst mal
+     * brute force Methode, gibt sicher was Schöneres, aber reicht erst mal
      */
     fun dial2(rightParam: Int, startParam: Int = 50): Pair<Long, Int> {
         log.debug("Dialing (2) $rightParam from $startParam")
@@ -74,19 +74,19 @@ class Dec1 {
         var start = startParam
         var right = rightParam
 
-        while(right > 0) {
+        while (right > 0) {
             start++
-            start %= 100;
-            right--;
-            if(start == 0)
+            start %= 100
+            right--
+            if (start == 0)
                 zeros++
         }
-        while(right < 0) {
+        while (right < 0) {
             start--
-            if(start < 0)
+            if (start < 0)
                 start += 100
             right++
-            if(start == 0)
+            if (start == 0)
                 zeros++
         }
 

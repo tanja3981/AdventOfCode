@@ -1,13 +1,13 @@
-package de.tanschmi.kotlin.aoc2025.dec01
+package de.tanschmi.kotlin.aoc2025
 
 import de.tanschmi.kotlin.FileReader
 import org.junit.jupiter.api.Test
 import java.io.File
 import kotlin.test.assertEquals
 
-class Dec1Test {
+class Dec01Test {
 
-    var dec1 = Dec1()
+    var dec1 = Dec01()
 
     @Test
     fun parseLine() {
@@ -30,7 +30,7 @@ class Dec1Test {
 
     @Test
     fun testStep1_exampleInput() {
-        var input = """
+        val input = """
             L68
             L30
             R48
@@ -43,17 +43,17 @@ class Dec1Test {
             L82
         """.trimIndent()
 
-        var expected: Long = 3
+        val expected: Long = 3
 
-        var sum: Long = dec1.step1(input.lines())
+        val sum: Long = dec1.step1(input.lines())
         assertEquals(expected, sum)
     }
 
     @Test
     fun testStep1_realInput() {
-        var file = File(ClassLoader.getSystemResource("2025inputs/dec1.txt").file)
-        var lines = FileReader().readLines(file)
-        var sum: Long = dec1.step1(lines)
+        val file = File(ClassLoader.getSystemResource("2025inputs/dec1.txt").file)
+        val lines = FileReader().readLines(file)
+        val sum: Long = dec1.step1(lines)
         println("Summe: $sum")
         assertEquals(1086, sum)
     }
@@ -84,7 +84,7 @@ class Dec1Test {
 
     @Test
     fun step2_exampleInput() {
-        var input = """
+        val input = """
             L68
             L30
             R48
@@ -99,15 +99,15 @@ class Dec1Test {
 
         val expected: Long = 6
 
-        var sum: Long = dec1.step2(input.lines())
+        val sum: Long = dec1.step2(input.lines())
         assertEquals(expected, sum)
     }
 
     @Test
     fun testStep2_realInput() {
-        var file = File(ClassLoader.getSystemResource("2025inputs/dec1.txt").file)
-        var lines = FileReader().readLines(file)
-        var sum: Long = dec1.step2(lines)
+        val file = File(ClassLoader.getSystemResource("2025inputs/dec1.txt").file)
+        val lines = FileReader().readLines(file)
+        val sum: Long = dec1.step2(lines)
         println("Summe: $sum")
         assertEquals(6268, sum)
     }

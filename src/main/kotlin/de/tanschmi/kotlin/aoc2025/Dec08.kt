@@ -1,7 +1,8 @@
-package de.tanschmi.kotlin.aoc2025.dec08
+package de.tanschmi.kotlin.aoc2025
 
 import java.util.*
 import kotlin.math.pow
+import kotlin.math.sqrt
 
 class Dec08 {
 
@@ -104,14 +105,15 @@ class Dec08 {
     }
 
     fun distance(a: Point, b: Point): Double {
-        return kotlin.math.sqrt(
+        return sqrt(
             (b.x - a.x).toDouble().pow(2) +
                     (b.y - a.y).toDouble().pow(2) +
                     (b.z - a.z).toDouble().pow(2)
         )
     }
+
+    data class Point(val x: Int, val y: Int, val z: Int)
+
+    data class JunctionBox(val first: Point, val sec: Point)
 }
 
-data class Point(val x: Int, val y: Int, val z: Int)
-
-data class JunctionBox(val first: Point, val sec: Point)

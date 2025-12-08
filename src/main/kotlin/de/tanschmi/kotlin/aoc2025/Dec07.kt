@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec07
+package de.tanschmi.kotlin.aoc2025
 
 class Dec07 {
     val SPLITTER = '^'
@@ -23,14 +23,14 @@ class Dec07 {
             }
             currentLocs = nextCoords
         }
-      return splits
+        return splits
     }
 
     fun step2(input: String): Long {
         val matrix = input.lines().map { it.toCharArray() }
 
         val startX = matrix.first().indexOf('S')
-        var currentLocs = mapOf<Int, Long>(startX to 1L)  //map mit default value initialisieren
+        var currentLocs = mapOf(startX to 1L)  //map mit default value initialisieren
 
         matrix.forEach { line ->
             val nextCoords = mutableMapOf<Int, Long>()

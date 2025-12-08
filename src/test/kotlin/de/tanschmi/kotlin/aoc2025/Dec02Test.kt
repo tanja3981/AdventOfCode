@@ -1,4 +1,4 @@
-package de.tanschmi.kotlin.aoc2025.dec02
+package de.tanschmi.kotlin.aoc2025
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

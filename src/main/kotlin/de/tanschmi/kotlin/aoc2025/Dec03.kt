@@ -1,6 +1,8 @@
-package de.tanschmi.kotlin.aoc2025.dec03
+package de.tanschmi.kotlin.aoc2025
 
-class Dec03Alternate2 {
+import kotlin.text.iterator
+
+class Dec03 {
 
     fun step1(lines: List<String>): Long { //unverändert
         var result = 0L
